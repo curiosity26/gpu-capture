@@ -115,6 +115,10 @@ pub fn start_capture(config: &crate::types::CaptureConfig) -> crate::types::Resu
         let mut encoded = ffmpeg::Packet::empty();
         while encoder.receive_packet(&mut encoded).is_ok() {
             encoded.set_stream(0);
+            // Set proper timestamp and duration based on frame count
+            let pts = (frame_count as u32 * 1000 / config.fps) as i64;
+            encoded.set_pts(Some(pts));
+            encoded.set_duration(1000 / config.fps as i64);
             encoded.write_interleaved(&mut oc)?;
         }
 

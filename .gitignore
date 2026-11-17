@@ -1,3 +1,5 @@
 target/
 recording.mp4
 *.dylib
+recordings/
+*.mp4
