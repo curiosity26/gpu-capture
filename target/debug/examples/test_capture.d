@@ -1,1 +1,0 @@
-/home/parallels/Projects/gpu-capture/target/debug/examples/test_capture: /home/parallels/Projects/gpu-capture/examples/test_capture.rs /home/parallels/Projects/gpu-capture/src/capture_wayland.rs /home/parallels/Projects/gpu-capture/src/encoder.rs /home/parallels/Projects/gpu-capture/src/lib.rs /home/parallels/Projects/gpu-capture/src/types.rs

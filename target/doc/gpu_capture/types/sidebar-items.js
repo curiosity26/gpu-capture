@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["CaptureError","Quality"],"struct":["CaptureConfig"],"type":["Result"]};
