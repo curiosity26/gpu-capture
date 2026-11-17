@@ -7,6 +7,7 @@ pub mod types;
 pub mod encoder;
 pub mod capture_portal;
 pub mod capture_wayland;
+pub mod capture_macos;
 
 pub use types::{CaptureConfig, Quality};
 use crate::types::*;
@@ -25,6 +26,12 @@ impl Recorder {
         {
             capture_wayland::start_capture(&self.config)?;
         }
+
+        #[cfg(target_os = "macos")]
+        {
+            capture_macos::start_capture(&self.config)?;
+        }
+
         Ok(())
     }
 
