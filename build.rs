@@ -48,6 +48,7 @@ fn main() {
         // Link the static library
         println!("cargo:rustc-link-search=native=target");
         println!("cargo:rustc-link-lib=static=capture_macos");
+        println!("cargo:rustc-link-lib=static=capture_macos_drm");
         println!("cargo:warning=Link flags set");
     }
     

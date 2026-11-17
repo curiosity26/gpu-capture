@@ -8,6 +8,7 @@ pub mod encoder;
 pub mod capture_portal;
 pub mod capture_wayland;
 pub mod capture_macos;
+pub mod capture_macos_drm;
 pub mod capture_drm;
 
 pub use types::{CaptureConfig, Quality};
@@ -37,7 +38,7 @@ impl Recorder {
 
         #[cfg(target_os = "macos")]
         {
-            capture_macos::start_capture(&self.config)?;
+            capture_macos_drm::start_capture(&self.config)?;
         }
 
         Ok(())
