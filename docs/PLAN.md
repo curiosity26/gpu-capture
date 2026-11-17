@@ -52,7 +52,7 @@ MP4 Muxer (FFmpeg)
 - [ ] Add audio capture (PulseAudio/ALSA)
 
 ### Phase 2: DRM Capture (Linux)
-- [ ] GBM + DMA-BUF backend for GPU-level capture
+- [x] GBM + DMA-BUF backend for GPU-level capture
 - [ ] EGLStream support (NVIDIA) for best DRM compatibility
 
 ### Phase 3: Cross-Platform
