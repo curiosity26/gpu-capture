@@ -1,10 +1,17 @@
-use gpu_capture::Recorder;
+use gpu_capture::{Recorder, CaptureConfig};
 
-fn main() {
-    let mut recorder = Recorder::new(gpu_capture::CaptureConfig::default()).expect("Failed to create recorder");
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = CaptureConfig {
+        output_path: "test_output.mp4".to_string(),
+        fps: 30,
+        quality: gpu_capture::Quality::High,
+    };
 
-    println!("Starting screen capture...");
-    recorder.start().expect("Failed to start recording");
-
-    println!("Recording in progress...");
+    let mut recorder = Recorder::new(config)?;
+    println!("Starting capture...");
+    recorder.start()?;
+    println!("Capture complete!");
+    let path = recorder.stop()?;
+    println!("Output: {}", path);
+    Ok(())
 }

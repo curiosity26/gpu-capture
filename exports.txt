@@ -1,0 +1,4 @@
+gpu_capture_start
+gpu_capture_get_frame
+gpu_capture_get_dimensions
+gpu_capture_stop

@@ -62,3 +62,5 @@ impl fmt::Display for CaptureError {
         }
     }
 }
+
+impl std::error::Error for CaptureError {}

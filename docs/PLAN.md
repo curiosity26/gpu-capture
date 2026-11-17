@@ -15,37 +15,34 @@ MP4 Muxer (FFmpeg)
     ↓ output.mp4
 ```
 
-## Current Status: Wayland Backend Working ✅
+## Current Status
 
+### Linux: Wayland Backend Working ✅
 **Working approach:** Wayland screencopy protocol (test frame encoding verified)
 
-### Verified Working
+**Verified Working:**
 - ✅ FFmpeg encoding via ffmpeg-next crate (H.264, MP4)
 - ✅ X11 connection via x11rb crate
 - ✅ Wayland screencopy protocol (test frame)
 - ✅ swscale RGB→YUV420P conversion
 
-### Known Issues
+**Known Issues:**
 - ❌ X11 GetImage fails on Wayland/Xwayland (Match error)
 - ❌ FFmpeg library x11grab not available (only CLI binary has it)
 
-## Key Findings
+### macOS: ScreenCaptureKit Backend Working ✅
+**Working approach:** ScreenCaptureKit via Swift FFI
 
-### FFmpeg Library vs CLI
-- FFmpeg **CLI binary** has x11grab support
-- FFmpeg **shared libraries** (libavdevice.so) do NOT have x11grab on this system
-- For library-based capture, must use X11/Wayland APIs directly
+**Verified Working:**
+- ✅ Swift ScreenCaptureKit capture implementation
+- ✅ FFI bridge between Rust and Swift
+- ✅ Live screen capture to MP4 (H.264 encoded)
+- ✅ 1280x720 capture at 30fps tested successfully
 
-### X11 on Wayland
-- X11 connection works via x11rb
-- Root window ID is correct (0x405)
-- GetImage fails with Match error (error_code 8)
-- Root cause: Xwayland virtual window doesn't contain actual screen content
-
-### Wayland Approach
-- Use wlroots screencopy protocol
-- Requires wlroots-based compositor (not GNOME/Mutter)
-- Test frame encoding verified working
+**Build Process:**
+- Swift code compiled with `swiftc -parse-as-library -c` to object file
+- Object file archived into static library
+- Static library linked via build.rs
 
 ## Remaining Tasks
 
@@ -60,7 +57,7 @@ MP4 Muxer (FFmpeg)
 
 ### Phase 3: Cross-Platform
 - [ ] Windows backend (Desktop Duplication API)
-- [ ] macOS backend (ScreenCaptureKit)
+- [x] macOS backend (ScreenCaptureKit) - **COMPLETE**
 
 ### Phase 4: UI Application
 - [ ] CLI tool with recording controls
