@@ -1,0 +1,19 @@
+[package]
+name = "gpu-capture"
+version = "0.1.0"
+edition = "2021"
+description = "Cross-platform GPU-accelerated screen/video capture library"
+
+[dependencies]
+libc = "0.2"
+ffmpeg-next = "9.1"
+crossbeam-channel = "0.5"
+zbus = "4.0"
+tokio = { version = "1.0", features = ["rt", "macros"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+x11rb = { version = "0.13", features = ["shm"] }
+
+[lib]
+name = "gpu_capture"
+path = "src/lib.rs"

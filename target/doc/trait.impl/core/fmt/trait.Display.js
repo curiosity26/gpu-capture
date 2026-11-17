@@ -1,0 +1,9 @@
+(function() {
+    const implementors = Object.fromEntries([["bitflags",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.99.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"struct\" href=\"bitflags/parser/struct.ParseError.html\" title=\"struct bitflags::parser::ParseError\">ParseError</a>",0]]],["gpu_capture",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.99.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"enum\" href=\"gpu_capture/types/enum.CaptureError.html\" title=\"enum gpu_capture::types::CaptureError\">CaptureError</a>",0]]],["rustix",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.99.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"struct\" href=\"rustix/io/struct.Errno.html\" title=\"struct rustix::io::Errno\">Errno</a>",0],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.99.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"struct\" href=\"rustix/fs/struct.Gid.html\" title=\"struct rustix::fs::Gid\">Gid</a>",0],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.99.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"struct\" href=\"rustix/net/netdevice/struct.InlinedName.html\" title=\"struct rustix::net::netdevice::InlinedName\">InlinedName</a>",0],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.99.0/core/fmt/trait.Display.html\" title=\"trait core::fmt::Display\">Display</a> for <a class=\"struct\" href=\"rustix/fs/struct.Uid.html\" title=\"struct rustix::fs::Uid\">Uid</a>",0]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":59,"fragment_lengths":[294,302,1054]}

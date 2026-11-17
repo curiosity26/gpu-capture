@@ -1,0 +1,1 @@
+/home/parallels/Projects/gpu-capture/target/debug/examples/test_encode: /home/parallels/Projects/gpu-capture/examples/test_encode.rs /home/parallels/Projects/gpu-capture/src/capture_x11.rs /home/parallels/Projects/gpu-capture/src/encoder.rs /home/parallels/Projects/gpu-capture/src/lib.rs /home/parallels/Projects/gpu-capture/src/types.rs
