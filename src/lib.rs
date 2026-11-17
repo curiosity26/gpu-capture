@@ -8,6 +8,7 @@ pub mod encoder;
 pub mod capture_portal;
 pub mod capture_wayland;
 pub mod capture_macos;
+pub mod capture_drm;
 
 pub use types::{CaptureConfig, Quality};
 use crate::types::*;
@@ -24,7 +25,14 @@ impl Recorder {
     pub fn start(&mut self) -> Result<()> {
         #[cfg(target_os = "linux")]
         {
-            capture_wayland::start_capture(&self.config)?;
+            // Try DRM capture first, fall back to Wayland
+            match capture_drm::start_capture(&self.config) {
+                Ok(_) => {}
+                Err(e) => {
+                    println!("DRM capture failed: {}", e);
+                    capture_wayland::start_capture(&self.config)?;
+                }
+            }
         }
 
         #[cfg(target_os = "macos")]
