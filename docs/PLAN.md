@@ -118,6 +118,13 @@ ls -la /dev/gpu_capture
 5. Verify no frame tearing or artifacts
 6. Test with multiple GPU drivers (i915, amdgpu, nouveau)
 
+**References:**
+- Linux DRM/KMS Documentation: https://www.kernel.org/doc/html/latest/gpu/drm-kms.html
+- DRM UAPI Documentation: https://www.kernel.org/doc/html/latest/gpu/drm-uapi.html
+- DRM Internals Documentation: https://www.kernel.org/doc/html/latest/gpu/drm-internals.html
+- DRM Subsystem Source: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/gpu/drm
+- DMA-BUF Framework: https://www.kernel.org/doc/html/latest/driver-api/dma-buf.html
+
 **Usage:**
 ```rust
 use gpu_capture::{Recorder, CaptureConfig};
@@ -190,6 +197,11 @@ ldconfig -p | grep eglstream
 4. Release frames back to stream after encoding
 
 **Fallback:** If EGLStream doesn't work for DRM content, fall back to kernel capture adapter approach.
+
+**References:**
+- NVIDIA EGLStream Documentation: https://docs.nvidia.com/sdk/eglstream/
+- EGL Specification: https://www.khronos.org/registry/EGL/specs/
+- NVIDIA Driver Documentation: https://docs.nvidia.com/display/
 
 ## Remaining Tasks
 
