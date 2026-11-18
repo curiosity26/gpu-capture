@@ -4,6 +4,7 @@ import MetalKit
 import CoreGraphics
 import CoreVideo
 import CoreMedia
+import VideoToolbox
 
 // Global state
 var metalDevice: MTLDevice?
@@ -60,7 +61,7 @@ func gpu_capture_drm_start(width: Int, height: Int, fps: Int) -> Int {
     let cmdQueue = device.makeCommandQueue()
     metalCommandQueue = cmdQueue
     
-    // Create display stream using the Swift API
+    // Create display stream
     let displayID = CGMainDisplayID()
     let stream = CGDisplayStream(display: displayID, outputWidth: width, outputHeight: height, pixelFormat: Int32(kCVPixelFormatType_32BGRA), properties: nil, handler: frameAvailableHandler)
     
