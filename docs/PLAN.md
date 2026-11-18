@@ -134,6 +134,63 @@ recorder.start()?;
 let output_path = recorder.stop()?;
 ```
 
+### EGLStream Capture (NVIDIA GPUs) - Planned
+EGLStream is an NVIDIA-specific API for sharing GPU-rendered content between processes. It provides a producer/consumer model where the display server produces frames and our capture application consumes them.
+
+**Technical Details:**
+
+1. **EGLStream Architecture:**
+   - Producer (display server) creates stream and attaches to EGL surface
+   - Consumer (capture app) connects to stream via `eglStreamConsumerConnect`
+   - Frames flow through stream without CPU involvement
+   - Consumer acquires frames via `eglStreamConsumerAcquireFrame`
+
+2. **Key EGLStream APIs:**
+   - `eglStreamCreate` - Create new stream
+   - `eglStreamConsumerConnect` - Consumer connects to producer's stream
+   - `eglStreamConsumerAcquireFrame` - Acquire next frame from stream
+   - `eglStreamConsumerReleaseFrame` - Release frame back to stream
+   - `eglStreamDestroy` - Clean up stream resources
+
+3. **DRM Capture Capability:**
+   - EGLStream operates at GPU level, below compositor
+   - DRM content rendered by GPU should be capturable via EGLStream
+   - No CPU involvement in frame transfer (zero-copy)
+   - Lower latency than framebuffer-based capture
+
+4. **NVIDIA Driver Requirements:**
+   - NVIDIA proprietary driver 470+ (Ubuntu ships with 550+)
+   - RTX 3080 (Turing architecture) fully supported
+   - Works with both X11 and Wayland display servers
+
+**Developer Setup (Ubuntu):**
+```bash
+# Install NVIDIA driver (if not already installed)
+sudo apt-get install nvidia-driver-550
+
+# Install EGLStream development libraries
+sudo apt-get install libegl1-mesa-dev libgl1-mesa-dev
+
+# Verify EGLStream is available
+ldconfig -p | grep eglstream
+```
+
+**Validation Testing:**
+1. Capture non-DRM content (desktop, games) - verify no black frames
+2. Capture DRM content (Netflix, Prime Video via browser) - verify content appears
+3. Test at various resolutions (720p, 1080p, 4K)
+4. Test at various frame rates (30fps, 60fps, 120fps)
+5. Verify no frame tearing or artifacts
+6. Test with X11 and Wayland display servers
+
+**Implementation Approach:**
+1. Create EGLStream producer in display server process
+2. Connect consumer in capture application
+3. Acquire frames from stream and encode with FFmpeg
+4. Release frames back to stream after encoding
+
+**Fallback:** If EGLStream doesn't work for DRM content, fall back to kernel capture adapter approach.
+
 ## Remaining Tasks
 
 ### Phase 1: Complete Wayland Implementation
@@ -143,8 +200,8 @@ let output_path = recorder.stop()?;
 
 ### Phase 2: DRM Capture (Linux)
 - [x] GBM + DMA-BUF backend for GPU-level capture
-- [ ] Kernel capture adapter module
-- [ ] EGLStream support (NVIDIA) for best DRM compatibility
+- [ ] EGLStream support (NVIDIA) - test on RTX 3080 with proprietary drivers
+- [ ] Kernel capture adapter module (fallback for non-NVIDIA GPUs)
 
 ### Phase 3: Cross-Platform
 - [ ] Windows backend (Desktop Duplication API)
