@@ -60,7 +60,7 @@ func gpu_capture_drm_start(width: Int, height: Int, fps: Int) -> Int {
     let cmdQueue = device.makeCommandQueue()
     metalCommandQueue = cmdQueue
     
-    // Create display stream
+    // Create display stream using the Swift API
     let displayID = CGMainDisplayID()
     let stream = CGDisplayStream(display: displayID, outputWidth: width, outputHeight: height, pixelFormat: Int32(kCVPixelFormatType_32BGRA), properties: nil, handler: frameAvailableHandler)
     
